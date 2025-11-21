@@ -10,6 +10,12 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+// Simple request logger for debugging (prints method and URL)
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 app.use("/user", userRoutes);
 app.use("/post", postRoutes);
 

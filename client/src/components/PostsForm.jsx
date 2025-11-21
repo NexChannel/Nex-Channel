@@ -19,7 +19,7 @@ const PostForm = ({ post, onSuccess }) => {
         name: post.name || "",
         title: post.title || "",
         content: post.content || "",
-        userId: post.userId || "",
+        userId: post.userId || post.UserId || (post.user && post.user.id) || "",
       });
     }
   }, [post]);
@@ -46,8 +46,10 @@ const PostForm = ({ post, onSuccess }) => {
 
     try {
       const data = {
-        ...formData,
-        userId: Number(formData.userId),
+        name: formData.name,
+        title: formData.title,
+        content: formData.content,
+        UserId: Number(formData.userId),
       };
 
       post ? await updatePost(post.id, data) : await createPost(data);

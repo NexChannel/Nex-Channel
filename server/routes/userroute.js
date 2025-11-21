@@ -9,7 +9,8 @@ route.get("/", async (req, res) => {
     });
     res.json(users);
   } catch (err) {
-    res.status(500).json({ error: "Gagal memuat users" });
+    console.error("GET /user error:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -18,6 +19,7 @@ route.post("/", async (req, res) => {
     const newUser = await User.create(req.body);
     res.status(201).json(newUser);
   } catch (err) {
+    console.error("POST /user error:", err);
     res.status(400).json({ error: err.message });
   }
 });
@@ -33,6 +35,7 @@ route.put("/:id", async (req, res) => {
     const user = await User.findByPk(req.params.id);
     res.json(user);
   } catch (err) {
+    console.error("PUT /user/:id error:", err);
     res.status(400).json({ error: err.message });
   }
 });
@@ -47,7 +50,8 @@ route.delete("/:id", async (req, res) => {
 
     res.status(204).send();
   } catch (err) {
-    res.status(500).json({ error: "Gagal menghapus user" });
+    console.error("DELETE /user/:id error:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 

@@ -68,7 +68,7 @@ const PostList = ({ onEdit }) => {
               <td>{post.name}</td>
               <td>{post.title}</td>
               <td>{post.content}</td>
-              <td>{post.User?.email || "-"}</td>
+              <td>{post.user?.email || "-"}</td>
 
               <td>
                 <button
